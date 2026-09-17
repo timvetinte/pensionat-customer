@@ -1,0 +1,62 @@
+package org.example.pensionat_customer.Controller;
+
+import jakarta.validation.Valid;
+import org.example.pensionat_customer.DTO.CustomerDTO;
+import org.example.pensionat_customer.Service.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/customers")
+public class CustomerController {
+
+    private final CustomerService service;
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
+
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/all")
+    public List<CustomerDTO> getAllCustomers() {
+        log.info("GET request for all customers");
+        List<CustomerDTO> customers = service.getAllCustomers();
+        log.info("Returned {} customers", customers.size());
+        return service.getAllCustomers();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id){
+        return service.getCustomerById(id);
+    }
+
+    @PostMapping("/register")
+    public CustomerDTO registerCustomers(@Valid @RequestBody CustomerDTO customerDTO) {
+        log.info("POST request to register customer");
+        log.info("Customer {} registered successfully", customerDTO.getName());
+        return service.registerCustomer(customerDTO);
+    }
+
+    @PutMapping("/editCst")
+    public ResponseEntity<CustomerDTO> editCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
+
+        return service.editCst(customerDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean deleteById(@PathVariable Long id) {
+        log.info("DELETE request to delete customer");
+
+        boolean result = service.deleteById(id);
+
+        log.info("Customer with id {} deleted successfully", id);
+        return result;
+    }
+
+
+
+}
