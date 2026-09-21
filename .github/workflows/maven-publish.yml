@@ -28,9 +28,11 @@ jobs:
       - run: chmod +x mvnw
       - run: ./mvnw test
         env:
-          DB_USERNAME: root
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_NAME: pensionat_db_test
+          DB_USER: root
           DB_PASSWORD: password
-          MYSQL_HOST: 127.0.0.1
 
   build-and-push:
     needs: test
