@@ -37,4 +37,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pensionat-booking:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pensionat-customer:latest
