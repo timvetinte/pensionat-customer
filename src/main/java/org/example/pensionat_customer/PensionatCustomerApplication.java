@@ -1,4 +1,4 @@
-package org.example.customerservice2;
+package org.example.pensionat_customer;
 
 import org.example.pensionat_customer.Model.Customer;
 import org.example.pensionat_customer.Repository.CustomerRepository;
